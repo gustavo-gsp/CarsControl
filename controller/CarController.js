@@ -8,8 +8,7 @@ const passport = require('passport');
 const { format, addDays } = require('date-fns');
 const session = require('express-session');
 const { trusted } = require('mongoose');
-process.env.PUPPETEER_SKIP_DOWNLOAD = 'true';
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 
 let users = [];
 let carList = [];
@@ -460,7 +459,6 @@ try{
     const plate = req.params.plate.toUpperCase();
     const browser = await puppeteer.launch({
         headless: 'new',
-        executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
     });
     const page = await browser.newPage();
 

@@ -290,7 +290,6 @@ plateInput.addEventListener('blur',()=> {
       url: `/getCarModel/${plate}`,
       type: 'GET',
       success: function (response) {
-        alert("AA")
         $('#carName').val(response.carModel); 
       },
       error: function (error) {

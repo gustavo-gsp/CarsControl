@@ -63,13 +63,13 @@
             <form action="/createCar" method="post">
                 <div>
                     <label class="labelNone">Placa:</label>
-                    <input type="text" name="plate" id="plate" placeholder="Placa" value="" required>
+                    <input type="text" name="plate" id="plate" placeholder="Placa" minlength="7" maxlength="7" required>
                 </div>
                 <label class="labelNone">Modelo:</label>
-                <input type="text" name="carName" id="carName" required>
+                <input type="text" name="carName" id="carName" maxlength="40" required>
                 <div>
                     <label class="labelNone">Reclamação:</label>
-                    <input type="text" name="complaint" id="complaint" placeholder="Reclamação do cliente" required>
+                    <input type="text" name="complaint" id="complaint" placeholder="Reclamação do cliente" maxlength="100" required>
                     <label class="labelShow">Especialidade:</label>
                     <select name="specialty" id="specialty">
                         <option value="Mecanica">Mecanica</option>
