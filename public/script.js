@@ -287,9 +287,10 @@ plateInput.addEventListener('blur',()=> {
 
   if(plate.length == 7){
     $.ajax({
-      url: `https://cars-control.onrender.com/getCarModel/${plate}`,
+      url: `/getCarModel/${plate}`,
       type: 'GET',
       success: function (response) {
+        alert("AA")
         $('#carName').val(response.carModel); 
       },
       error: function (error) {
