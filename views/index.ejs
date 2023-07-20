@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Controle de patio</title>
+</head>
+<body>
+    <% if(message != "") {%>
+        <section class="message">
+            <p><%=message%></p>
+            <span id="close-message"><i class="bi bi-x"></i></span>
+        </section>
+        <% } %>
+    <h1 class="title">CARS-CONTROL</h1>
+    
+    <section class="dates">
+        <div class="menuLeft">
+            <div>
+                <%if(!history) {%>
+                <a href="/carPage/today/a">Hoje</a>
+                <a href="/carPage/date1/a">Amanhã</a>
+                <%if(userFunc == "mec" || userFunc == "fun"){ %> <a href="/carPage/today/all">Todos</a> <% } %>
+                <% if(userFunc != "mec" && userFunc != "fun" && userFunc != "buyer") {%>
+                <a class="btnAdd" href="/carPage/today/addCar">Novo veículo</a>
+            </div>    
+                <div class="menuDates">    
+                <a href="/carPage/date2/a"><%=week[1]%></a>
+                <a href="/carPage/date3/a"><%=week[2]%></a>
+                <a href="/carPage/date4/a"><%=week[3]%></a>
+                <% } %>
+                <%}else {%><a href="/carPage/today/a">Sair do Historico</a> <%}%>
+            </div>
+        </div>
+        <div class="menuRight">
+            <label><%=userName%></label>
+            <a class="btnLogout" href="/carPage/hoje/logout">Sair</a>
+            <% if(userFunc != "mec" && userFunc != "fun" && userFunc != "buyer") {%>
+            <a id="btnMenu"><i id="btnMenu" class="bi bi-list"></i></a>
+            <% } %>
+        </div>
+        
+        <div class="togle" id="togle">
+            <a href="/carPage/date1/a">Amanhã</a>
+            <a href="/carPage/date2/a"><%=week[1]%></a>
+            <a href="/carPage/date3/a"><%=week[2]%></a>
+            <a href="/carPage/date4/a"><%=week[3]%></a>
+            <a href="/carPage/historic/plate">Historico de Veículos</a>
+            <a class="openControl">Controle de Usúarios</a>
+            <a class="logout" href="/carPage/hoje/logout">Sair</a>
+        </div>
+        
+    </section>
+
+    <% if(userFunc != "mec" && userFunc != "fun" && userFunc != "buyer") {%>
+    <section id="<%=addCar%>">
+        <div>
+            <h1 >Adicionar Veículo</h1>
+            <form action="/createCar" method="post">
+                <div>
+                    <label class="labelNone">Placa:</label>
+                    <input type="text" name="plate" id="plate" placeholder="Placa" value="" required>
+                </div>
+                <label class="labelNone">Modelo:</label>
+                <input type="text" name="carName" id="carName" required>
+                <div>
+                    <label class="labelNone">Reclamação:</label>
+                    <input type="text" name="complaint" id="complaint" placeholder="Reclamação do cliente" required>
+                    <label class="labelShow">Especialidade:</label>
+                    <select name="specialty" id="specialty">
+                        <option value="Mecanica">Mecanica</option>
+                        <option value="Funilaria">Funilaria</option>
+                    </select>
+                </div><br>
+                <label class="labelShow">Responsável:</label>
+                <select id="responsible" name="responsible" onchange="showPriority()">
+                    <option value=""> </option>
+                    <% responsibles.forEach((resp) => { %>
+                        <option value="<%=resp.user%>|<%=resp._id%>"><%=resp.user.toUpperCase()%></option>
+                        <%})%>
+                </select>
+                <label class="labelShow">Data agendamento:</label>
+                <input type="datetime-local" name="date" id="date" onchange="showPriority()" required>
+                <input type="hidden" value="<%= userName %>" name="userName">
+                <label class="labelShow">Previsão conclusão:</label>
+                <input type="datetime-local" name="forecast" id="forecast" required>
+                <div class="labelShow">
+                <label >Prioridade:</label>
+                    <select id="priority" name="priority">
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="btn">
+                    <a class="addClose" href="/carPage/today/a">Cancelar</a>
+                    <button id="addButton" type="submit">Adicionar</button>
+                </div>
+            </form>
+        </div>
+       
+    </section>
+    <%}%>
+
+    <section id="modalUser">
+        <div id="controlUser">
+            <div id="closeUser">
+                <a href="javascript:close('#modalUser')" ><i class="bi bi-x-lg"></i></a>
+            </div>
+            <h1 style="margin: .5rem; color: orange;">Controle de Usúarios</h1>
+        <div id="btnUser"><a class="newUser">Novo Usúario</a></div>
+        <ul>
+            <%users.forEach(users => {%>
+                <li>
+                    <p>Nome: <%=users.user%></p><p><%=users.func%></p>
+                    <div id="updateUser">
+                        <a href="javascript:updatePassword('<%=users._id%>')"><i class="bi bi-pencil-fill"></i></a>
+                        <a href="javascript:deleteUser('<%=users._id%>','<%=users.user%>')"><i class="bi bi-trash"></i></a>
+                    </div>
+                </li>
+            <%})%>
+        </ul>
+        </div>
+    </section>
+    <section class="modalPassword">
+        <div class="cardPassword">
+            <div style="padding: .5rem;"><a class="close" href="/carPage/today/a"><i class="bi bi-x"></i></a></div><br>
+            <h2>Alterar Senha</h2>
+            <form id="formPassword" method="get">
+                <label>Nova senha:</label>
+                <input type="password" name="passwordNew">
+                <hr>
+                <div class="confirm">
+                    <button class="btnConfirmPassword">Confirmar</a>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="modalDeleteUser">
+            <div class="cardDeleteUser">
+                <div style="padding: .5rem; width: 100%;"><a class="close" href="/carPage/today/a" ><i class="bi bi-x"></i></a></div><br>
+                <p>Deseja realmente deletar o usúario <i class="nameUser"></i>?</p><br>
+                <hr>
+                <div class="confirm">
+                    <a class="btnNot" href="/carPage/today/a">Não</a>
+                    <a class="btnYes" id="btnDelete">Sim</a>
+                </div>
+            </div>
+        </section>
+
+    <section class="addUser">
+        <div>
+            <form action="/createUser" method="post" autocomplete="off">
+                <a href="javascript:close('.addUser')" ><i class="bi bi-x-lg"></i></a>
+                <h1>Cadastro De Usuário</h1>
+                <label >Usuário:</label>
+                <input type="text" name="newUser" id="user" placeholder="Digite o nome de usuario" autocomplete="off" required><br>
+                <input type="hidden" id="hiddenUser">
+                <p id="errorMessage" style="display: none; font-size: .9rem;">Este nome de Usúario ja existe.</p>
+                <label style="margin-right: .6rem;">Senha:</label>
+                <input type="password" name="newPassword" id="password" placeholder="Digite a senha" required><br>
+                <label>função:</label>
+                <select name="func" id="func" style="margin: .5rem 5.5rem 0 1.4rem" required>
+                    <option value="mec">Mecânico</option> <option value="fun">Funileiro</option>
+                    <option value="buyer">Comprador</option> <option value="seller">Vendedor</option>
+                    <option value="manager">Gerente</option>
+                </select><br>
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </section >
+   
+        <% if(details) {%>
+            <section class="details">
+                <div class="detailsTop">
+                <div style="margin-left: 0;">
+                <div><label>Modelo:</label>
+                <textarea readonly name="" id="" cols="20" rows="1"><%=model%></textarea></div>
+                <div><label >Placa:</label>
+                <textarea readonly cols="7" rows="1"><%= plate %></textarea></div></div>
+                <div><div><label ><%if(history){%> Data agendamento: <%}else{%>Previsão:<%}%></label>
+                    <textarea readonly cols=<%if(history){%>"15"<%}else{%>"10"<%}%> rows="1"
+                        ><%if(history){%> <%=date%> <%}else{%> <%=forecast %> <%}%></textarea></div>
+                    <div><label >Status:</label>
+                    <textarea readonly name="" id="" cols="10" rows="1" ><%= stage %></textarea></div></div>
+                <%if(!history){%>
+                    <div class="priorityDetails">
+                        <label>Prioridade: </label>
+                        <select id="detailPriority" <% if(userFunc == "mec" || userFunc == "fun") { %> style = "display: none;"<%}%>>
+                            <option value=""><%= priority %></option>
+                        </select>
+                        <% if(userFunc == "mec" || userFunc == "fun") { %>
+                            <textarea readonly cols="1" rows="1"><%= priority %></textarea>
+                        <% } %>
+                    </div>
+                <% }%>
+                    <div>
+                    <label >Reclamação:</label>
+                    <textarea readonly cols="30" rows="1"><%= complaint %></textarea></div>
+                </div>
+                <div class="bigText">
+                <% if(services != "" && !history) {%>    
+                <div>
+                    <label >Serviços:</label>
+                    <ul class="ulServices">
+                        <% services.forEach((service, index) =>{%>
+                        <li <%if(service.conclude){%>style=" text-decoration: line-through;"<% } %> >
+                            <%= service.service %> <a class="btnCheck" href="/getById/<%=car._id%>/concludeService/<%= index %>" 
+                                title="Cuncluir Etapa"><i class="bi bi-check-lg"></i></a>
+                        </li>
+                        <% }) %>
+                    </ul>
+                </div>
+                <div class="listBreak"></div>
+                <% } %>
+                <% if(parts != "" && !history) {%>
+                <div>
+                    <label style="margin-right: 1.5rem;" class="lab">Peças:</label>
+                    <ul class="ulParts">
+                        <% parts.forEach((part, index) =>{%>
+                        <li <%if(part.conclude){%>style=" text-decoration: line-through;"<% } %>>
+                            <%= part.part %> <a class="btnCheck" href="/getById/<%=car._id%>/concludePart/<%= index %>" 
+                                title="Cuncluir Etapa"><i class="bi bi-check-lg"></i></a>
+                        </li>
+                        <% }) %>
+                    </ul>
+                </div>
+                    <% } %>
+                <% if(userFunc != "mec" && userFunc != "fun") { %>
+                <%if(history) {%>
+                    <label style="margin: 0 3rem;">Último responsavel: <%=resp%></label>
+                <%}%>
+                <div>    
+                    <label>Historico:</label>
+                    <ul class="<% if(parts != '' && services != '') {%> ulHistoric <%}else{%>ulUnic <%} %>">
+                        <% historic.forEach((history) =>{%>
+                        <li>
+                            <%= history %>
+                        </li>
+                        <% }) %>
+                    </ul>
+                </div>    
+                    <% } %> 
+                </div>
+                <%if(!history) {%>
+                <div class="detailBtns">
+                    <a href="/carPage/today/a">Fechar</a>
+                    <a href="/getById/<%=id%>/parts/<%=car.stage%>">Pedir Peças &nbsp;<i class="bi bi-wrench-adjustable-circle"></i></a>
+                    <% if(userFunc != "mec" && userFunc != "fun") { %>
+                    <a href="/getById/<%=id%>/conclude/forced">Forçar Conclusão<i class="bi bi-check-lg"></i></a>
+
+                    <%if(car.documentDetails == undefined) {%>
+                        <a href="/getById/<%=id%>/detailsDocument/car.stage" id="consultDetails">*Consultar Dados Avançados* &nbsp;<i class="bi bi-search"></i></a>
+                    <% }else{ %>
+                        <a href="javascript:documentDetails('open')">Mostrar Dados Avançados</a>
+                    <%}%>
+                <% } %>
+                </div>
+                <% } %>
+            </section>
+            <section class="detailsDocument">
+                <div class="cardDocument">
+                    <div style="padding: .5rem;" id="closeUser"><a href="javascript:documentDetails('close')"><i class="bi bi-x"></i></a></div>
+                    <h2>Detalhes de Documento</h2>
+                    <%if(car.documentDetails != undefined) {%>
+                    <div>
+                        <label>Marca: </label>
+                        <textarea cols="15" rows="1" readonly><%=car.documentDetails.marca_modelo.marca%></textarea>
+                        <label >Ano Fabricação: </label>
+                        <textarea cols="5" rows="1" readonly><%=car.documentDetails.ano_fabricacao%></textarea>
+                    </div>
+                    <div>
+                        <label >Cor: </label>
+                        <textarea cols="10" rows="1" readonly><%=car.documentDetails.cor_veiculo.cor%></textarea>
+                        <label >Combustivél:</label>
+                        <textarea cols="15" rows="1" readonly><%=car.documentDetails.combustivel.combustivel%></textarea>
+                    </div>
+                    <div>
+                        <p> 
+                        <p><label >Renavan:</label>
+                        <textarea cols="15" rows="1"readonly><%=car.documentDetails.renavam%></textarea></p>
+                        <p><label >Chassi:</label>
+                        <textarea cols="20" rows="1"readonly><%=car.documentDetails.chassi%></textarea></p>
+                        </p>
+                        </div>
+                    <% } %>    
+                </div>
+            </section>
+            <% } %>
+                    <% if(userFunc != "mec" && userFunc != "fun" && userFunc != "buyer") {%>
+                        <%if(!history) {%>
+        <section class="filter">
+                <form action="/carPage/today/responsible" method="get">
+                    <label>Filtrar Responsavel: </label>
+                    <select id="responsibleList" name="responsibleList">
+                        <option value="all">Todos</option>
+                        <% responsibles.forEach((resp) => { %>
+                            <option value="<%=resp.user%>"><%=resp.user.toUpperCase()%></option>
+                            <%})%>
+                        </select>
+                        <button> <i class="bi bi-search"></i> </button>
+                </form>
+        </section>
+            <%}else {%>
+                <section class="filter">
+                    <form action="/carPage/historic/plate" method="get">
+                        <label>Filtrar por placa: </label>
+                        <input type="text" name="plateFilter" id="plateFilter" placeholder="ex. ABC1A123" required>
+                            <button> <i class="bi bi-search"></i> </button>
+                            <a style="margin:0 .3rem 0 .3rem;" href="/carPage/historic/plate"><i class="bi bi-arrow-clockwise"></i></a>
+                    </form>
+            </section>
+                <%}%>
+        <% } %>
+
+
+    <% if(conclude) {%>
+        <section class="modal">
+            <div class="card">
+                <div style="padding: .5rem;"><a class="close" href="/carPage/today/a"><i class="bi bi-x"></i></a></div><br>
+                <p>Deseja realmente concluir essa etapa?</p><br>
+                <hr>
+                <div class="confirm">
+                    <a class="btnNot" href="/carPage/today/a">Não</a>
+                    <a class="btnYes" href="/conclude/<%=car.id%>/<%=status%>">Sim</a>
+                </div>
+            </div>
+        </section>
+    <% } %>
+    <%if(part) { %>
+    <section class="modal">
+        <form action="/parts/<%=car._id%>" method="post" id="formParts">
+            <div class="cardParts">
+                <div style="padding: .5rem;"><a class="close" href="/carPage/today/a"><i class="bi bi-x"></i></a></div><br>
+                <p>Digite as peças e/ou serviços que deseja incluir:</p><br>
+                <input type="text" name="parts" id="parts" placeholder="Peças">
+                <button id="includePart" type="button">Incluir</button><br>
+                <ul id="listParts"></ul><br>
+                <input type="text" name="services" id="services" placeholder="Serviços">    
+                <button id="includeService" type="button">Incluir</button>
+                <ul id="listServices"></ul>
+                <div style="margin-top: .5rem;"><button id="btnSend" type="button">Enviar</button></div>
+            </div>
+        </form>
+    </section>
+    <% } %>
+        
+    <section class="cars">    
+        <ul>
+                <% carList.forEach((car) =>{ %>
+                    <li onclick="location.href='/getById/<%=car._id%>/details/<%=car.stage%>'">
+                        <div class="list">
+                            <p class="rowsList"><%if(!history) {%><p class="priorityList"><%= car.priority %></p> <%}%>   
+                                <p><%= car.responsible%> <i class="bi bi-tools"></i></p>
+                                <p><%=car.specialty%> <i class="bi bi-tools"></i></p> </p>
+                                <p class="rowsList"><p class="pNone"> Veículo:&nbsp</p><p> <%= car.carName %> &nbsp;</p> 
+                                <p> Placa: <%= car.plate %> <i class="bi bi-tools"></i> </p></p> <p class="rowsList"> <p> Status: <%= car.stage%> 
+                                <i class="bi bi-tools"></i> </p><%if(!history && car.stage == "Agendado") {%>
+                            <p><%=car.date.substring(11, 16)%> </p> <%}else{%>
+                                <p><%if(!history){%>Previsão:<%}else{%>Data entrega: <%}%> <%=car.forecast%></p> <% } %></p>
+                        </div> 
+                        <div class="btnList">
+                            
+                            <%if(!history) {%>        
+                                <a href="/getById/<%=car._id%>/parts/<%=car.stage%>" title="Pedir Peças">
+                                    <i class="bi bi-wrench-adjustable-circle"></i></a>
+                                <a href="/getById/<%=car._id%>/assumed/<%=car.stage%>" title="Assumir"><i 
+                                    class="bi bi-person-fill-up"></i></a>
+                                <a class="btnConclude" href="/getById/<%= car._id%>/conclude/<%= car.stage %>" 
+                                    title="Cuncluir Etapa"><i class="bi bi-check-lg"></i></a>
+                                    <% } %>
+                    </div>
+                </li>
+                <% }) %>
+            </ul>
+                
+        </section>
+        <section class="loading"> <p>Carregando, por favor aguarde...</p> </section>
+        <section class="circle">
+            <div id="loading-circle"></div>
+            <p>Aguarde...</p>
+        </section>
+    <script>
+        let responsibles = <%- JSON.stringify(responsibles) %>;
+        let carList = <%- JSON.stringify(carListAll) %>;
+        let userFunc = <%- JSON.stringify(userFunc) %>;
+        let part = <%- JSON.stringify(part) %>;
+        let details = <%- JSON.stringify(details) %>;
+        <%if(details){ %>
+            let carDetails = <%- JSON.stringify(car) %>;
+        <%}%>
+        let users = <%- JSON.stringify(users) %>; 
+      </script>
+    <script src="/script.js"></script>
+</body>
+</html>

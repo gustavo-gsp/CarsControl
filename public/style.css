@@ -1,0 +1,1087 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fruktur:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fruktur:ital@1&family=Lilita+One&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+body {
+  background-color:#212153;
+  width: 100%;
+  height: 100%;
+  color: rgba(255, 119, 0, 0.973);
+  font-weight: bolder;
+}
+select {
+  padding: 0.4rem;
+  border: none;
+  border-radius: 0.2rem;
+  margin: 0 0.2rem 0 0.2rem;
+}
+input {
+  margin: 1rem;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  background-color: rgb(214, 255, 255);
+  text-align: center;
+  text-transform: uppercase;
+}
+div {
+  display: inline;
+}
+a {
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+.title {
+  color: #212153;
+  text-align: center;
+  background-color: rgba(255, 119, 0, 0.973);
+  margin-bottom: 0.2rem;
+  font-family: 'Lilita One', cursive;
+  text-shadow: 0 0 .3em #aaffff;
+  flex-basis: 100%;
+}
+.circle{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #00000080;
+  color: #fff;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+  flex-direction: column;
+}
+#loading-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  animation: spin 1s linear infinite;
+  margin: .5rem;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.circle p{
+  color: #00ffff;
+}
+#addCar{
+  width: 100%;
+  height: 20%;
+  background-color: #212153;
+  padding: 1rem 0 1rem 0;
+  background-color: #212153;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: rgb(167, 167, 167);
+}
+#addCarPhone{
+  width: 100%;
+  height: 20%;
+  background-color: #212153;
+  padding: 1rem 0 1rem 0;
+  background-color: #212153;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: rgb(167, 167, 167);
+}
+#addCar h1, #addCarPhone h1 {
+  padding: 0.3rem;
+}
+#addCar .btn, #addCarPhone .btn{
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+}
+#addCar .btn button, #addCarPhone .btn button {
+  text-align: center;
+  padding: 0.3rem;
+  background-color: #005290;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border: #005290 solid 1px;
+  font-weight: bolder;
+  color: rgb(255, 119, 0);
+  transition: all 0.3s ease-in-out;
+}
+#addCar button:hover, #addCarPhone button:hover{
+  background-color: #143044;
+}
+.addClose{
+  text-align: center;
+  padding: 0.3rem;
+  background-color: #005290;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border: #005290 solid 1px;
+  font-weight: bolder;
+  color: rgb(255, 119, 0);
+  transition: all 0.3s ease-in-out;
+  margin-right: 2rem;
+  display: none;
+}
+#addCarNone {
+  display: none;
+}
+.addUser {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #00000050;
+  color: #fff;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+.addUser div{
+    width: 21rem;
+    height: 18rem;
+    background-color: rgba(255, 119, 0, 0.973);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+    color: #212153;
+}
+.addUser div form{
+    text-align: center;
+    margin-top: 1.5rem;
+}
+.addUser div form button{
+    margin: 1.5rem;
+    padding: .5rem;
+    background-color: #212153;
+    color: rgba(0, 255, 255, 0.877);
+    border: none;
+    border-radius: .2rem;
+    pointer-events: auto;
+    font-weight: bold;
+    
+}
+.addUser div form button:hover{
+    cursor: pointer;
+    background-color: #005290;
+    color: #fff;
+}
+.addUser div form a{
+  margin-left: 18rem;
+  color: #212153;
+  padding: 0.2rem;
+  transition: all 0.2s ease-in-out;
+  border: black solid 1px;
+  border-radius: 50%;
+}
+.addUser div form a:hover {
+    background-color: #212153;
+    color: aqua;
+    border-radius: 50%;
+    border: black solid .1rem;
+  }
+.addUser div h1{
+    flex-basis: 100%;
+    width: 100%;
+}
+ul {
+  list-style: none;
+  font-size: 1.2rem;
+  width: 100%;
+  color: rgb(167, 167, 167);
+}
+.cars ul li {
+  position: relative;
+  padding: .7rem .1rem;
+  background-color: #212153;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  margin: .5rem 0;
+}
+ul li:hover {
+  background-color: rgb(71, 56, 56);
+  color: #ffffffcc;
+  cursor: pointer;
+}
+ul li p:hover{
+  cursor: pointer;
+}
+.list {
+  cursor: default;
+  display: flex;
+  flex-wrap: wrap;
+}
+.list p i{
+    margin:0 .6rem 0 .4rem;
+}
+ul li div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cars ul li:nth-child(odd) {
+  background-color: #005290;
+}
+.cars ul li:nth-child(odd):hover {
+  background-color: rgb(71, 56, 56);
+}
+ul li a {
+  background-color: #c1e952;
+  margin: 0 0.3rem .1rem 0;
+  padding: 0.2rem;
+}
+ul li a:hover {
+  background-color: #b1ec0c;
+}
+.details {
+  max-width: 100%;
+  background-color: #212153;
+  display:flex;
+  flex-wrap:wrap;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+  justify-content: center;
+}
+.details textarea {
+  padding: 0.2rem;
+  font-weight: bold;
+  cursor: default;
+  background-color: #ffee;
+  text-align: center;
+}
+.details .detailsTop div {
+  margin: 0.4rem 0 0.2rem 0;
+  display: flex;
+  align-items: center;
+}
+.details .detailsTop div label {
+  margin: 0 1rem 0 1rem;
+}
+.details a{
+    background-color: #00ffff;
+    margin: 1rem;
+    color: #272727;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.details a:hover{
+    background-color: #143044;
+}
+.details label{
+  margin-right: .3rem;
+  /* margin-left: .3rem; */
+}
+.details .detailsTop{
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-left: 0;
+  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.details .bigText{
+  width: auto;
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem 0 1rem;
+}
+.bigText div{
+  display: flex;
+  align-items: center;
+  
+}
+.details .ulServices, .details .ulParts{
+  max-height: 10rem;
+  width: 22rem;
+  overflow-y:scroll;
+  border-radius: .3rem;
+  background-color: #212153;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.details ul li{
+  height: auto;
+  padding: 0;
+  margin: .2rem;
+  background-color: #01467a;
+  color:rgba(0, 255, 255, 0.842);
+  width: 98%;
+} 
+.ulHistoric{
+  font-size: 1rem;
+  max-height: 10rem;
+  max-width: 26rem;
+  overflow-y: scroll;
+  border-radius: .3rem;
+  background-color: #212153;
+}
+.ulHistoric li:hover, .ulUnic li:hover {
+  cursor: unset;
+}
+.ulUnic{
+  font-size: 1rem;
+  max-height: 10rem;
+  width: 40rem;
+  overflow-y: scroll;
+  border-radius: .3rem;
+  background-color: #212153;
+}
+
+.details .btnCheck{
+  margin: 0;
+  background-color: #c1e952;
+  
+}
+.detailBtns{
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  padding-top: 1rem;
+  flex-wrap: wrap;
+}
+.detailBtns a{
+  text-align: center;
+  color: rgba(255, 119, 0, 0.973);
+  padding: 0.3rem;
+  background-color: #005290;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border: #005290 solid 1px;
+  transition: all 0.3s ease-in-out;
+}
+.break {
+  flex-basis: 100%;
+}
+.loading{
+  display: flex;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #00000080;
+  color:#00ffff;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #00000080;
+  color: #fff;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+.modalPassword {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #00000080;
+  color: #fff;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+.modalDeleteUser{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #00000080;
+  color: #fff;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+.card{
+  width: 20rem;
+  height: 9rem;
+  border: rgba(49, 134, 204, 0.877) solid 0.1rem;
+  border-radius: 0.4rem;
+  position: relative;
+  background-color: #212153;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cardPassword {
+  width: 20rem;
+  height: 15rem;
+  border: rgba(49, 134, 204, 0.877) solid 0.1rem;
+  border-radius: 0.4rem;
+  position: relative;
+  background-color: #212153;
+  display: none, flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  color: #00ffff;
+  text-align: center;
+}
+.cardDeleteUser{
+  width: 25rem;
+  height: 9rem;
+  border: rgba(49, 134, 204, 0.877) solid 0.1rem;
+  border-radius: 0.4rem;
+  position: relative;
+  background-color: #212153;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.confirm a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card p {
+  margin: 1rem 1rem 1.3rem 1rem;
+  color: aquamarine;
+}
+.card hr, .cardPassword hr, .cardDeleteUser hr {
+  width: 90%;
+  border-color: #00aa2a;
+}
+.cardPassword hr {
+  margin-left: 5%;
+  margin-top: 1rem;
+}
+.confirm{
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  margin-bottom: .3rem;
+}
+.confirm button{
+  padding: .7rem;
+  margin: 1rem .5rem;
+  background-color:#323279;
+  color: rgba(255, 119, 0, 0.973);
+  border: 0;
+  border-radius: .3rem;
+  font-weight: bolder;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+.confirm button:hover{
+  cursor: pointer;
+  background-color:#143044;
+}
+.cardParts{
+  width: 26rem;
+  border: rgba(49, 134, 204, 0.877) solid 0.1rem;
+  border-radius: 0.4rem;
+  position: relative;
+  background-color: #212153;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: .8rem;
+}
+.cardParts div{
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+}
+.cardParts button{
+  text-align: center;
+  padding: 0.1rem;
+  background-color: #005290;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border: #005290 solid 1px;
+  font-weight: bolder;
+  color: rgb(255, 119, 0);
+  transition: all 0.3s ease-in-out;
+  margin: .5rem;
+}
+.cardParts button:hover{
+  background-color: #143044;
+}
+.cardParts div #btnSend{
+  background-color:#005290;
+  color:rgb(255, 119, 0);
+  padding: .5rem;
+  font-size: 1.2rem;
+}
+.cardParts ul li{
+  font-size: 1rem;
+  height: auto;
+  background-color:transparent;
+  margin: .2rem;
+  cursor: unset;
+  padding: .2rem;
+}
+#listParts:hover, #listServices:hover{
+  cursor: unset;
+}
+.cardParts ul{
+  background-color: #005290;
+  border-radius: .2rem;
+  width: 90%;
+}
+.cardParts input{
+  width: 70%;
+}
+.close {
+  position: absolute;
+  right: 0.2rem;
+  top: 0.3rem;
+  color: #fff;
+  padding: 0.2rem;
+  transition: all 0.2s ease-in-out;
+}
+.close:hover {
+  background-color: rgba(255, 0, 0, 0.884);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.btnNot {
+  padding: 0.2rem;
+  transition: all 0.2s ease-in-out;
+  bottom: 0.1rem;
+  margin: 0 1rem 0 1rem;
+  border: solid 1px #ff0000;
+  color: #ff0000;
+  font-weight: bolder;
+}
+.btnNot:hover {
+  background-color: #ff0000;
+  color: #fff;
+}
+.btnYes {
+  padding: 0.2rem;
+  transition: all 0.2s ease-in-out;
+  bottom: 0.1rem;
+  margin: 0 1rem 0 1rem;
+  border: solid 1px #00aa2a;
+  color: #00aa2a;
+}
+.btnYes:hover {
+  background-color: #00aa2a;
+  color: #fff;
+  cursor: pointer;
+}
+.dates{
+    background-color: rgba(255, 119, 0, 0.973);
+    padding: .3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2rem;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .dates a{
+    background-color: #212153;
+    color: rgb(167, 167, 167);
+    text-shadow: 0 0r .1rem #0000009c;
+    font-weight: bolder;
+    padding: .2rem .2rem;
+    border-radius: 0rem .2rem 0 0rem;
+    margin: 0;
+    border: .1rem solid rgb(92, 92, 92);
+    height: 2rem;
+    transition: all 0.3s ease-in-out;
+}
+.dates a:hover, .dates a.selected{
+  background-color: #323279;
+  cursor: pointer;
+}
+.dates label{
+  color: black;
+  margin-right: .2rem;
+}
+#btnMenu{
+  color: #eef;
+}
+#btnMenu:hover{
+  cursor: pointer;
+}
+.menuLeft{
+  margin-right: .3rem;
+}
+.togle{
+  width: 14rem;
+  height: auto;
+  background-color: #005290;
+  position: fixed;
+  right: .2rem;
+  top: 5rem;
+  display: none;
+  flex-wrap: wrap;
+  padding: .2rem;
+  z-index: 9999;
+  border-radius: .3rem;
+}
+.togle a{
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: .2rem;
+  border-radius: .3rem;
+}
+.logout{
+  display: none;
+}
+.message{
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.priorityList{
+  background-color:#272727;
+  color:rgb(255, 208, 0);
+  padding: .1rem;
+  margin: 0 .3rem 0 .2rem;
+  max-width: 2rem;
+}
+.filter{
+  background-color: rgba(255, 119, 0, 0.973);
+  padding: .3rem;
+  display: flex;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  /* justify-content: end; */
+}
+.filter label{
+  color: black;
+}
+.filter select{
+  background-color: #212153;
+  color:#00ffff;
+  font-weight: bold;
+  border: none;
+  text-align: center;
+  width: 10rem;
+  font-size: 1rem;
+}
+.filter button{
+  background-color: #01467a;
+  color: #00ffff;
+  border: none;
+  border-radius: .2rem;
+  padding: .5rem;
+  transition: all 0.3s ease-in-out;
+}
+.filter button:hover{
+  cursor: pointer;
+  background-color: #212153;
+}
+.filter a{
+  background-color: #01467a;
+  color: #00ffff;
+  border: none;
+  border-radius: .2rem;
+  padding: .4rem;
+  transition: all 0.3s ease-in-out;
+}
+.filter form{
+  display: flex;
+  align-items: center;
+}
+.filter input{
+  margin: 0 .4rem 0 .4rem;
+  padding: .5rem;
+  width: 6rem;
+  text-transform: uppercase;
+}
+#modalUser{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #00000050;
+  color: #fff;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+#controlUser{
+  width: 30rem;
+  height: 30rem;
+  background-color: #212153;
+  overflow-y: scroll;
+  justify-content: center;
+  color: #00ffff;
+  padding: .2rem;
+  border-radius: .2rem;
+}
+#controlUser #closeUser {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: right;
+  width: 28.5rem;
+}
+#controlUser #closeUser a{
+  color: #00ffff;
+  margin: .3rem .2rem .3rem .3rem;
+  border-radius: 50%;
+  padding: .3rem;
+  position: fixed;
+  z-index: 9999;
+}
+#controlUser #closeUser a:hover{
+  background-color: red;  
+}
+#controlUser #btnUser{
+  display: flex;
+  flex-basis:100%;
+  background-color: rgb(255, 119, 0);
+  justify-content: right;
+  padding: .2rem;
+}
+.newUser{
+  background-color:#143044;
+  padding: .5rem;
+  border-radius: .2rem;
+}
+.newUser:hover{
+  cursor: pointer;
+}
+#controlUser ul li{
+  padding: .3rem 0;
+  justify-content: space-between;
+}
+#controlUser ul li:nth-child(odd) {
+  background-color: #005290;
+}
+#controlUser ul li:nth-child(odd):hover {
+  background-color: rgb(71, 56, 56);
+}
+.detailsDocument{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #00000050;
+  color: #fff;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+.cardDocument{
+  width: auto;
+  height: 20rem;
+  background-color: #212153;
+  justify-content: center;
+  align-items: center;
+  color: #00ffff;
+  padding: .2rem;
+  border-radius: .2rem;
+
+}
+.cardDocument h2{
+  text-align: center;
+}
+.cardDocument div{
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0;
+  padding: 0 .3rem;
+}
+.cardDocument div p{
+  display: flex;
+  align-items: center;
+}
+.cardDocument div p textarea, .cardDocument div textarea{
+  background-color: rgba(214, 255, 255, 0.89);
+  border-radius: .3rem;
+  font-weight: bolder;
+  padding: .3rem 0;
+  text-align: center;
+}
+.cardDocument div label{
+  margin: 0 .5rem;
+}
+.cardDocument #closeUser {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: end;
+  margin: .2rem;
+}
+.cardDocument #closeUser a{
+  color: #00ffff;
+  border-radius: 50%;
+  padding: .1rem;
+  /* position: fixed; */
+  z-index: 9999;
+  font-size: 1.2rem;
+}
+.cardDocument #closeUser a:hover{
+  background-color: rgba(255, 0, 0, 0.904);
+}
+
+@media(min-width: 600px){
+  .btnAdd{
+    display: none;
+  }
+}
+@media(max-width: 600px){
+  #addCar, .menuDates, .pNone, .labelNone{
+    display: none;
+  }
+  #addCarPhone .labelShow{
+    display: flex;
+    justify-content: center;
+    flex-basis: 100%;
+    margin: .5rem;
+  }
+  #addCarPhone .btn{
+    margin: .8rem;
+  }
+  #addCarPhone h1{
+    padding: 0;
+  }
+  .addClose{
+    display: inline;
+  }
+  .textDetails{
+    width: 80%;
+  }
+  .details .bigText{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+  .details .bigText textarea{
+      margin: .3rem .3rem 0 0;
+  }
+  .detailsTop{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+  }
+  .details .detailsTop {
+    margin: 0.4rem 0 0.2rem 0;
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .details .detailsTop div{
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+  }
+  .details .detailsTop .priorityDetails{
+    display: flex;
+    justify-content: center;
+  }
+  .details .ulServices, .details .ulParts, .details .ulHistoric{
+    width: 23rem;
+    margin: .5rem;
+  } 
+  .details .detailsTop div label {
+    margin: 0 .3rem 0 .3rem;
+  }
+  .list i{
+    display: none;
+  }
+  ul li a {
+    margin: 0 0 .3rem 0;
+  }
+  ul li p{
+    margin: 0 .5rem 0 .5rem;
+  }
+  ul li{
+    height: 9rem;
+    padding: 0;
+  }
+  .listBreak{
+    display: block;
+    width: 8rem;
+  }
+  .btnList {
+    display: flex;
+  }
+  .btnList a{
+    padding: .5rem;
+    margin: .3rem;
+  }
+  .cardParts{
+   width: 100%; 
+  }
+  .cardParts input{
+    width: 90%;
+    height: 3rem;
+  }
+  .bigText div{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+  }
+  .ulUnic{
+    width: 90%;
+  }
+  .filter form{
+    display: flex;
+    flex-basis: 100%;
+    justify-content: space-between;
+  }
+  .filter{
+    padding-right: 1rem;
+  }
+  #controlUser{
+    width: 95%;
+    height: 90%;
+  }
+  #controlUser ul li{
+    padding: 0;
+    height: 3rem;
+  }
+  #controlUser #updateUser a{
+    margin: 0 .1rem;
+  }
+  #controlUser #closeUser {
+    width: 100%;
+}
+.cardPassword{
+  width: 95%;
+}
+.cardDocument{
+  width: 98%;
+}
+.cardDocument div{
+  justify-content: center;
+}
+.cardDocument div p{
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  margin: .3rem;
+  flex-wrap: wrap;
+}
+.cardDocument div textarea{
+  background-color: rgba(214, 255, 255, 0.89);
+  border-radius: .3rem;
+  font-weight: bolder;
+  padding: .3rem 0;
+  text-align: center;
+}
+.rowsList {
+  min-width: 100%;
+  flex-basis: 100%;
+}
+}
+/* style tela de Login: */
+.container{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #fff;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+  color: rgba(255, 119, 0, 0.973);
+}
+.container h1{
+  margin: 2rem;
+}
+.login{
+  text-align: center;
+  border: .1rem solid rgba(0, 255, 255, 0.377);
+  padding: 2rem;
+  background-color: rgba(0, 255, 255, 0.096);
+  border-radius: .8rem;
+  font-weight: bolder;
+}
+.login button{
+  text-align: center;
+  text-justify: center;
+  color: rgba(255, 119, 0, 0.973);
+  padding: 0.3rem;
+  background-color: #005290;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border: #005290 solid 1px;
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
+  margin: 0;
+}
+.login button:hover{
+  background-color: #212153;
+}
+#user{
+  text-transform: lowercase;
+}
